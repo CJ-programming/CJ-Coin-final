@@ -323,8 +323,8 @@ def full_node_apis():
 				new_mempool = []
 
 				for tx in block['txs']:
-					tx_params = (list(tx.values()) + [block_hash, block_height])[1:]
-
+					tx_params = list(tx.values())[1:] + [block_hash, block_height]
+					
 					for index, param in enumerate(tx_params):
 						if isinstance(param, Iterable) and not isinstance(param, (str, bytes)):
 							tx_params[index] = dumps(param)

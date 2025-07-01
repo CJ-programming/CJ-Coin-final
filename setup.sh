@@ -37,6 +37,24 @@ while true; do
 done;
 
 while true; do
+	echo "How many miners/clients do you want on the network?"
+	read miner_clients
+
+	if [ "$miner_clients" -ge 1 ]; then
+		break
+
+	elif [ "$nodes" -lt 1 ]; then # verifies that nodes are the correct input
+		echo "Error: Miner/client number must be greater than or equal to one."
+		continue
+	else
+		echo "Error: Invalid input."
+		continue
+	fi
+
+	break
+done;
+
+while true; do
 	echo "What do you want the ip address of the seed node to be? (default is your current private ip address)"
 	read seed_node_ip
 
@@ -60,12 +78,20 @@ while true; do
 done;
 
 cp -r ../src/node node_1
+cp -r ../src/miner_client miner_client_1
 
 sed -i "s/^seed_node_ipv4_address = .*/seed_node_ipv4_address = '$seed_node_ip'/" node_1/global_vars.py # configure proper seed node ip address
 sed -i "s/^seed_node_port = .*/seed_node_port = '$seed_node_port'/" node_1/global_vars.py # configure proper seed node ip address
 
+sed -i "s/^seed_node_ipv4_address = .*/seed_node_ipv4_address = '$seed_node_ip'/" miner_client_1/global_vars.py # configure proper seed node ip address
+sed -i "s/^seed_node_port = .*/seed_node_port = '$seed_node_port'/" miner_client_1/global_vars.py # configure proper seed node ip address
+
 for ((i=2; i<=nodes; i++)); do # copies nodes and initialises network
 	cp -r node_1 "node_$i"
+done
+
+for ((i=2; i<=miner_clients; i++)); do # copies miners/clients and initialises network
+	cp -r miner_client_1 "miner_client_$i"
 done
 
 

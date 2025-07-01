@@ -180,7 +180,7 @@ def boot_strap(key, port, request_type="post"):
 
 	responses = []
 
-	for net_addr in nodes_json:
+	for net_addr in nodes_json: # goes through every node in seed_node list
 		try:
 			updated_blocks_response = get(f"http://{net_addr['ipv4_address']}:{net_addr['port']}/discover/blockchain/headers/{block_height}/-1").json()
 			updated_txs_response = get(f"http://{net_addr['ipv4_address']}:{net_addr['port']}/discover/blockchain/txs/{block_height}/-1").json()

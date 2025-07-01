@@ -203,7 +203,7 @@ def full_node_apis():
 		return jsonify(verack_status)
 
 	@bp.route('/discover/blockchain/headers/<int:start_height>/<string:end_height>', methods=['GET'])
-	def get_blockchain_headers_view(start_height, end_height):
+	def get_blockchain_headers_view(start_height, end_height): # gets headers from a desired range of block heights
 		end_height = int(end_height)
 
 		if end_height == -1:
@@ -326,7 +326,7 @@ def full_node_apis():
 					tx_params = list(tx.values())[1:] + [block_hash, block_height]
 					
 					for index, param in enumerate(tx_params):
-						if isinstance(param, Iterable) and not isinstance(param, (str, bytes)):
+						if isinstance(param, Iterable) and not isinstance(param, (str, bytes)): # makes sure it converts to proper json
 							tx_params[index] = dumps(param)
 
 					for inp in tx['inputs']:

@@ -215,7 +215,7 @@ def boot_strap(key, port, request_type="post"):
 			except IntegrityError:
 				print("Block updated")
 
-def init_all(node_id_hex, port):
+def init_all(node_id_hex, port):	
 	init_blockchain()
 	init_peers()
 	init_utxos()

@@ -255,8 +255,6 @@ if __name__ == '__main__':
     print('own_address:', own_address)
 
     # print('send_address:', '78f8b71cb21f2bfafdb8383ecec1f3ed8749e71cc1dea90fee3f5b46d2794069')
-
-    create_private_key(key)
     
     print('Press Ctrl-C to quit')
     
